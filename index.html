@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WebSocket Chat Client</title>
+    <script>
+        var ws = new WebSocket("ws://140.84.181.104:8765/chat");
+
+        ws.onopen = function(event) {
+            console.log("Connected to WebSocket server");
+        };
+
+        ws.onmessage = function(event) {
+            var message = event.data;
+            console.log("Received message:", message);
+        };
+
+        function sendMessage() {
+            var input = document.getElementById("messageInput");
+            var message = input.value;
+            input.value = "";
+            console.log("Sending message:", message);
+            ws.send(message);
+        }
+    </script>
+</head>
+<body>
+    <input type="text" id="messageInput">
+    <button onclick="sendMessage()">Send</button>
+</body>
+</html>
